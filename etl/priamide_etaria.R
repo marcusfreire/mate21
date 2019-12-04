@@ -1,4 +1,4 @@
-sim = read.csv("/home/marcus/Documentos/UFBA/mate21_visualizacao/trabalho/data/sim_total/sim_coordebadas_paralelas.csv")
+sim = read.csv(text=getURL("https://raw.githubusercontent.com/marcusfreire/mate21/master/data/sim_total/sim_coordebadas_paralelas.csv"), header=T)
 
 idade = sim %>% filter((ano >= 2006) & (ano <= 2017)) %>%
         filter(idade != 'ING') %>%

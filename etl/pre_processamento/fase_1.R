@@ -31,7 +31,7 @@ pre_processamento = function(sim,ano_atual){
   # IDADE
   
   sim = sim %>% mutate(idade = case_when(substr(idade,1,1) %in% c(0,1,2,3) ~ "< 1",
-                               substr(idade,1,1)== 5 ~ ">= 100",
+                               substr(idade,1,1)== 5 ~ "Maior_100",
                                idade == "000" | substr(idade,1,1) == 9 ~ "ING",
                                substr(idade,1,1)==4 & substr(idade,2,2)==0  ~ "1-9",
                                substr(idade,1,1)==4 & substr(idade,2,2)==1  ~ "10-19",
@@ -44,12 +44,13 @@ pre_processamento = function(sim,ano_atual){
                                substr(idade,1,1)==4 & substr(idade,2,2)==8  ~ "80-89",
                                substr(idade,1,1)==4 & substr(idade,2,2)==9  ~ "90-99")
             )
+
   sim = sim %>% mutate(idade = case_when(is.na(idade)~'ING',
-                                                     !is.na(idade)~paste0(idade)))
+                                          !is.na(idade)~paste0(idade)))
   
   # Sexo - Excluindo igual a zero e mudando de 1 para M, 2 para F
   sim = sim %>% mutate(sexo = case_when(sexo == 1 ~ 'M',
-                                                            sexo == 2 ~ 'F'))
+                                        sexo == 2 ~ 'F'))
   sim = sim %>% filter(sexo!=0) 
   
   # RacaCOR
@@ -61,10 +62,7 @@ pre_processamento = function(sim,ano_atual){
                                            is.na(racacor) ~ 'null'))
   
   # Filtrando pelas ocorrencias que ocorreram na BAHIA
-  sim = sim %>% filter(substr(codmunocor,1,2)==29)
-  
-  #convertendo pra factor todas as colunas
-  sim = colwise(as.factor)(sim)
+  sim = sim %>% filter(substr(codmunocor,1,2)==29) %>% filter(idade != 'ING')
   
   sim
 }
@@ -81,13 +79,15 @@ for (ano_atual in seq(2007,2017)) {
   sim = pre_processamento(sim,ano_atual)
   sim_total = bind_rows(sim_total,sim)
 }
+#convertendo pra factor todas as colunas
+sim_total = colwise(as.factor)(sim_total)
 
-write.csv(sim_total,file = "/home/marcus/Documentos/UFBA/mate21_visualizacao/trabalho/data/sim_total/sim.csv")
+write.csv(sim_total,file = "/home/marcus/Documentos/UFBA/mate21_visualizacao/trabalho/data/sim_total/sim.csv",row.names = F)
 
 colnames(sim_total)
-sim_total = colwise(as.factor)(sim_total)
+
 sim_coordenadas_paralelas = sim_total %>% group_by(idade,sexo,racacor,causabas,ano)%>% tally()
 
 write.csv(sim_coordenadas_paralelas,file = "/home/marcus/Documentos/UFBA/mate21_visualizacao/trabalho/data/sim_total/sim_coordebadas_paralelas.csv",row.names = F)
 
-sim_coordenadas_paralelas %>% group_by(causabas) %>% tally(sort = T)
+sim_coordenadas_paralelas %>% group_by(causabas) %>% summarise(n = sum(n))
