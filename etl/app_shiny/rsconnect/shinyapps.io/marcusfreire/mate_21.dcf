@@ -5,8 +5,8 @@ account: marcusfreire
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 1558268
-bundleId: 2640649
+bundleId: 2641097
 url: https://marcusfreire.shinyapps.io/mate_21/
-when: 1575474640.99982
+when: 1575483301.21855
 asMultiple: FALSE
 asStatic: FALSE

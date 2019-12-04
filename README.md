@@ -3,7 +3,9 @@
 
 ### Aluno: Marcus Freire
 
-[![IMAGE ALT TEXT HERE](https://raw.githubusercontent.com/marcusfreire/mate21/master/metadata/img/tela_inicial.png)](https://youtu.be/3vevuR38xtQ)
+[![Link contendo vídeo explicando a aplicação](https://raw.githubusercontent.com/marcusfreire/mate21/master/metadata/img/tela_video.png)](https://youtu.be/3vevuR38xtQ)
+
+[![Link contendo a aplicação](https://raw.githubusercontent.com/marcusfreire/mate21/master/metadata/img/tela_app.png)](https://marcusfreire.shinyapps.io/mate_21/)
 
 A base de referência é a do SISTEMA DE INFORMAÇÃO DE MORTALIDADE - SIM, para os anos de 2006 a 2017 do estado da Bahia, disponibilizada pelo  [DATASUS](http://datasus.saude.gov.br/informacoes-de-saude/servicos2/transferencia-de-arquivos), assim como a base de municípios do Brasil, onde é filtrado pelos municípios baianos. As informações de **LATITUDE**, **LONGITUDE** e **IN_POBREZA** fazem parte da relação de municípios de extrema pobreza indicados pelo [IBGE DOWNLOAD](https://www.ibge.gov.br/estatisticas/downloads-estatisticas.html), sendo possível filtrar as variáveis para visualização. Como todas as três bases contêm um número de variáveis muito grande, então foi filtrado das três bases as variáveis que são importantes para a visualização.
 
