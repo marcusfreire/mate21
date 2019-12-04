@@ -69,7 +69,7 @@ p = sim2 %>%
                  label = 'Idade', values = ~idade),
             list(tickvals = c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,20),
                  ticktext = c("I","II","III","IV","V","VI","VII","VIII","IX","X","XI","XII","XIII","XIV","XV","XVI","XVII","XVIII","XX"),
-                 label = 'Obito', values = ~causabas),
+                 label = 'Causa Básica', values = ~causabas),
             list(tickvals = c(1,2),
                  ticktext = c("M","F"),
                  label = 'Sexo', values = ~sexo)

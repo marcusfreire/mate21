@@ -25,7 +25,7 @@ server <- shinyServer(function(input, output, session) {
      add_lines(y = ~XVIII, name = "XVIII") %>%
      add_lines(y = ~XX, name = "XX") %>%
      layout(
-       title = "Causa de Básica", yaxis2 = ay,
+       title = "Causa Básica", yaxis2 = ay,
        xaxis = list(title="ANO")
      )
  })
