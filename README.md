@@ -3,6 +3,8 @@
 
 ### Aluno: Marcus Freire
 
+[![IMAGE ALT TEXT HERE](https://raw.githubusercontent.com/marcusfreire/mate21/master/metadata/img/tela_inicial.png)](https://youtu.be/3vevuR38xtQ)
+
 A base de referência é a do SISTEMA DE INFORMAÇÃO DE MORTALIDADE - SIM, para os anos de 2006 à 2017 para o estado da Bahia, disponibilizado pelo [DATASUS](http://datasus.saude.gov.br/informacoes-de-saude/servicos2/transferencia-de-arquivos), assim como a base de municípios do Brasil, onde é filtrado pelos municípios da Bahia. Contendo as informações de **LATITUDE**, **LONGITUDE** e **IN_POBREZA** que indica se faz parte da relação de municípios
 de extrema pobreza. [IBGE DOWNLOAD](https://www.ibge.gov.br/estatisticas/downloads-estatisticas.html).
 Filtrando variáveis para visualização
@@ -23,7 +25,7 @@ Como todas as três bases estão contém um número de variáveis muito grande, 
 	  - 5 -Indígena
   * **CODMUNOCOR**:
     - Município de ocorrência do óbito, conforme códigos IBGE.
-  * CAUSABAS:
+  * **CAUSABAS**:
     - Causa básica, conforme a Classificação Internacional de Doença (CID), 10a. Revisão
     
 A Classificação Estatística Internacional de Doenças e Problemas Relacionados com a Saúde (CID; em inglês: International Statistical Classification of Diseases and Related Health Problems, ICD). A CID é publicada pela Organização Mundial de Saúde (OMS) e é usada globalmente para estatísticas de morbilidade e de mortalidade, como no nosso caso do SIM é utilizado o CID10 para indicar a causa da morte. para o tratamento dessa variável **CAUSABAS**, foi utilizado como referência uma tabela disponibilizada pelo DATASUS em [link](http://tabnet.datasus.gov.br/cgi/sih/mxcid10.htm).  
