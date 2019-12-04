@@ -1,21 +1,7 @@
-#will install the packages library if you don't have it
-packages = c("read.dbc","dplyr","tidyr","sparklyr","shinydashboard","shiny","leaflet","DT")
-for(pck in packages){
-  if(!is.element(pck, installed.packages()[,1]))
-  {install.packages(pck)
-  }else {library(pck,character.only = T)}
-}
-
 server <- shinyServer(function(input, output, session) { 
-  munic = read.csv(file = "/home/marcus/Documentos/UFBA/mate21_visualizacao/trabalho/data/causabas_munic/part-00000-8ce75990-bbd1-485c-9842-adfa444c295b-c000.csv")
-  #munic = munic[1:10,]
-  munic$nu_longit = as.numeric(sub(",",".",munic$nu_longit))
-  munic$nu_latitud = as.numeric(sub(",",".",munic$nu_latitud))
-  
+ 
   ## app.R ##
-
-  
-  filtered_title_type <- reactive({
+ filtered_title_type <- reactive({
     if(input$i_title_type == "All"){
       munic
     } else {
@@ -40,8 +26,41 @@ server <- shinyServer(function(input, output, session) {
       addMarkers(
         data = fully_filtered(),
         lng =~nu_longit , 
-        lat =~nu_latitud,popup = ~ds_nomepad)
+        lat =~nu_latitud,popup = paste(munic$ds_nomepad,": ",munic$n))
   })
+  
+  output$coordenadaspolares <- renderPlotly({
+    source("coordenadas_paralelas.R")
+    p
+  })
+  
+  output$piramideetaria <- renderPlotly({
+    idade = sim %>% filter((ano >= 2008) & (ano <= 2010)) %>%
+      select(idade,sexo,n)%>%
+      group_by(idade, sexo) %>% summarize_all(funs(sum)) %>%
+      mutate(n =case_when(sexo == 'F' ~ paste0("-",n),
+                          sexo == 'M' ~ paste0(n)))
+    
+    
+    sort(c(levels(sim$idade),"M_q_100+"))
+    max = idade %>% summarise(max = max(n))
+    max = sort(as.integer(max$max),decreasing = T)[1]
+    max = round((max/1000))
+    
+    plot_ly(idade, x = ~n, y = ~idade, color = ~sexo) %>%
+      add_bars(orientation = "h",
+               hoverinfo = "y+text+name", text = ~n, 
+               colors = c("red", "blue")) %>%
+      layout(bargap = 0.1, barmode = "overlay", 
+             title = "BA, 2016", 
+             xaxis = list(tickmode = "array", 
+                          tickvals = c(-1000*max, round(max/2)*-1000, 0, round(max/2)*1000,max*1000),
+                          ticktext = c(paste0(max,"k"), paste0(round(max/2),"k"), "0", paste0(round(max/2),"k"),paste0(max,"k")), 
+                          title = "População"), 
+             yaxis = list(title = "Idade"))
+    
+  })
+  
   
 })
 

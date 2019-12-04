@@ -1,0 +1,13 @@
+name: mate_21
+title: mate_21
+username:
+account: marcusfreire
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 1558268
+bundleId: 2638354
+url: https://marcusfreire.shinyapps.io/mate_21/
+when: 1575423574.90307
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: .RData
